@@ -1,0 +1,393 @@
+{
+	"info": {
+		"name": "AnkiApp",
+		"_postman_id": "789118e2-cdab-dc45-25d0-d58633676c73",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "294d3051-c355-47c7-a0e8-85fd9fd59719",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Response have token\", function () {",
+									"    var response = pm.response.json();",
+									"    pm.expect(response).to.have.property('token');",
+									"    pm.environment.set(\"TOKEN\", response.token);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mac\": \"asdasdasdasd\"\n}"
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Api",
+			"description": "",
+			"item": [
+				{
+					"name": "Question",
+					"description": "",
+					"item": [
+						{
+							"name": "list question",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"question_image_url\": \"image_url\",\n\t\"question_raw_image_url\" : \"raw_image_url\",\n\t\"answer\": \"hello\",\n\t\"type\": \"text_answer\",\n\t\"difficulty\": 10\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/question",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"question"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "create question",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"question_image_url\": \"image_url\",\n\t\"question_raw_image_url\" : \"raw_image_url\",\n\t\"answer\": \"hello\",\n\t\"type\": \"text_answer\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/question",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"question"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "get question detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"question_image_url\": \"image_url\",\n\t\"question_raw_image_url\" : \"raw_image_url\",\n\t\"answer\": \"hello\",\n\t\"type\": \"text_answer\",\n\t\"difficulty\": 10\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/question/5a3a342c9ee98ba44175b5cb",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"question",
+										"5a3a342c9ee98ba44175b5cb"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "edit question",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"answer\": \"meow meow\"\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/question/5a3a34099ee98ba44175b5ca",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"question",
+										"5a3a34099ee98ba44175b5ca"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "delete question",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"question_image_url\": \"image_url_2\",\n\t\"question_raw_image_url\" : \"raw_image_url_2\",\n\t\"answer\": \"hello\",\n\t\"type\": \"image_answer\",\n\t\"difficulty\": 10\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/question/5a3b633f510300001aa4fd92",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"question",
+										"5a3b633f510300001aa4fd92"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Play",
+					"description": "",
+					"item": [
+						{
+							"name": "answer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"question_id\": \"5a3a342c9ee98ba44175b5cb\",\n\t\"know_answer\": true,\n\t\"answer_correct\": true\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/play/save_answer",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"play",
+										"save_answer"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "get question",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"question_id\": \"5a3a342c9ee98ba44175b5cb\",\n\t\"know_answer\": true,\n\t\"answer_correct\": true\n}"
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/play/next_question",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"play",
+										"next_question"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "reset learning history",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/play/reset",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"play",
+										"reset"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Image",
+					"description": "",
+					"item": [
+						{
+							"name": "upload",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"value": "",
+											"description": "",
+											"type": "file"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/api/{{API_VERSION}}/image",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"api",
+										"{{API_VERSION}}",
+										"image"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fc6f366b-3f28-407f-bdf6-703259f4965e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9478b6e-ac7e-4d68-bfaf-52348aed3fff",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}

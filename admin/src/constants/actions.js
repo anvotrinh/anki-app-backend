@@ -1,0 +1,20 @@
+export const NormalActions = [
+  'LOGOUT',
+  'EDIT_SERVER_ERROR_IN_LIST',
+  'REMOVE_SERVER_ERROR_FROM_LIST',
+];
+
+export const RequestActions = [
+  'LOGIN',
+  'GET_PROFILE',
+  'UPLOAD_USER',
+  'UPLOAD_QUESTION',
+  'LIST_CATEGORY',
+  'LIST_QUESTION',
+  'LIST_TAG',
+  'LIST_SERVER_ERROR',
+  'UPLOAD_CATEGORY',
+  'UPLOAD_TAG',
+  'EDIT_SERVER_ERROR',
+  'REMOVE_SERVER_ERROR',
+];

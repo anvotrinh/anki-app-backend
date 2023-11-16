@@ -1,0 +1,42 @@
+image: docker:git
+
+services:
+  - docker:dind
+
+before_script:
+  # Login to gitlab container registry
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  # Add deploy ssh key
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - mkdir -p ~/.ssh
+  - echo "$SSH_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - ssh-add ~/.ssh/id_rsa
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  only:
+    - tags
+  script:
+    - IMAGE_NAME=registry.gitlab.com/pascaliaasia/anki_app_backend
+    - docker build -t $IMAGE_NAME:latest .
+    - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$CI_COMMIT_REF_NAME
+    - docker push $IMAGE_NAME:latest
+    - docker push $IMAGE_NAME:$CI_COMMIT_REF_NAME
+
+deploy:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - echo "$APP_ENV" > .env
+    - scp .env $SSH_SERVER_USER@$SERVER_IP:.env
+    - scp docker-compose.yml $SSH_SERVER_USER@$SERVER_IP:docker-compose.yml
+    - command="docker-compose pull api;docker-compose up -d;"
+    - ssh $SSH_SERVER_USER@$SERVER_IP "$command"

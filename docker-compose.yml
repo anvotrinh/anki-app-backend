@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: mongo
+    container_name: "ankiapp_db"
+    env_file: .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${MONGO_VOLUMES}:/data/db
+
+  api:
+    build: .
+    image: registry.gitlab.com/pascaliaasia/anki_app_backend:latest
+    container_name: "ankiapp_api"
+    env_file: .env
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+      - "${HTTPS_PORT}:${HTTPS_PORT}"
+    links:
+      - db
+      

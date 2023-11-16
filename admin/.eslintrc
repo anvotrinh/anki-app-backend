@@ -1,0 +1,39 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "rules": {
+        "react/display-name": [0],
+        "semi": ["error", "always"],
+        "quotes": ["error", "single", "avoid-escape"],
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "never"],
+        "computed-property-spacing": ["error", "always"],
+        "comma-dangle": ["error", "always-multiline"],
+        "comma-style": ["error", "last"],
+        "space-infix-ops": ["error", {"int32Hint": false}],
+        "arrow-parens": ["error", "as-needed"],
+        "react/no-direct-mutation-state": [0],
+        "react/no-deprecated": [0]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "globals": {
+      "require": true,
+      "Float32Array": true,
+      "Promise": true,
+      "global": true
+    },
+    "root": true
+}
